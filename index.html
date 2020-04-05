@@ -1,0 +1,35 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <?php
+        
+        <table border=1>
+            <tr>
+                <td>ID</td>
+                <td>Ime</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <?php
+            // Pregled iz baze
+            $rezultat = mysqli_query($bp, 'select * from Klijenti');
+            if (!$rezultat) die(mysqli_error($bp));
+            
+            // Ispis klijenata
+            while ($red = mysqli_fetch_object($rezultat))
+            {
+                echo "<tr>";
+                echo "<td>{$red->ID}</td>";
+                echo "<td>{$red->Ime}</td>";
+                echo "<td><a href='izmena.php?ID={$red->ID}'>Izmena</a></td>";
+                echo "<td><a href='uklanjanje.php?ID={$red->ID}'>Uklanjanje</a></td>";
+                echo "<td><a href='dodavanje.php?ID={$red->ID}'>Dodavanje klijenta</a></td>";
+                echo "<td><a href='pregled.php?ID={$red->ID}'>Pregled</a></td>";
+                echo "</tr>";
+            }
+            ?>
+        </table>
+        <a href="dodavanje.html">Dodavanje</a>
+    </body>
+</html>
